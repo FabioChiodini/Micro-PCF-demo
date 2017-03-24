@@ -1,7 +1,18 @@
 ---
 applications:
-- name: pcfdemo
+- name: pcfdemo-producer
   memory: 512M 
   instances: 1
-  host: pcfdemo-yourname
-  path: ./target/pcfdemo.war
+  host: pcfdemo-producer-${random-word}
+  path: PCFDemo-producer/src
+  timeout: 90
+  services:
+   - myrabbit
+- name: pcfdemo-map
+  memory: 512M 
+  instances: 2
+  host: pcfdemo-map-${random-word}
+  path: PCFDemo-map/target/pcfdemo-map.war
+  timeout: 90
+  services:
+   - myrabbit
